@@ -1,4 +1,19 @@
 var currentFilter = "all";
+var lsAddress = "KanbanCloneData";
+
+function getLocalStorage() {
+    try {
+        JSON.parse(localStorage.getItem(lsAddress));
+    } catch (error) {
+        localStorage.setItem(lsAddress, "[]");
+    }
+
+    return localStorage.getItem(lsAddress) || "[]";
+}
+
+function setLocalStorage(data) {
+    localStorage.setItem(lsAddress, data);
+}
 
 function reloadPage() {
     document.getElementById("loader").classList.remove("off");
@@ -53,7 +68,7 @@ function toggleTheme() {
 }
 
 function loadData() {
-    let data = JSON.parse(localStorage.getItem("data")) || [];
+    let data = JSON.parse(getLocalStorage()) || [];
 
     data.forEach(card => {
         addCard(card.id, card.content, card.color, card.locked, card.column, false);
@@ -61,7 +76,7 @@ function loadData() {
 }
 
 function saveCardData(card_id, content, color) {
-    let data = JSON.parse(localStorage.getItem("data")) || [];
+    let data = JSON.parse(getLocalStorage()) || [];
 
     data.push({
         id: card_id,
@@ -71,19 +86,17 @@ function saveCardData(card_id, content, color) {
         column: null
     });
 
-    localStorage.setItem("data", JSON.stringify(data));
+    setLocalStorage(JSON.stringify(data));
 }
 
 function removeData(card_id) {
-    let data = JSON.parse(localStorage.getItem("data")) || [];
-
+    let data = JSON.parse(getLocalStorage()) || [];
     data = data.filter(card => card.id != card_id);
-
-    localStorage.setItem("data", JSON.stringify(data));
+    setLocalStorage(JSON.stringify(data));
 }
 
 function swapColorData(card_id) {
-    let data = JSON.parse(localStorage.getItem("data")) || [];
+    let data = JSON.parse(getLocalStorage()) || [];
 
     data.forEach(card => {
         if (card.id == card_id) {
@@ -94,11 +107,11 @@ function swapColorData(card_id) {
         }
     });
 
-    localStorage.setItem("data", JSON.stringify(data));
+    setLocalStorage(JSON.stringify(data));
 }
 
 function lockCardData(card_id) {
-    let data = JSON.parse(localStorage.getItem("data")) || [];
+    let data = JSON.parse(getLocalStorage()) || [];
 
     data.forEach(card => {
         if (card.id == card_id) {
@@ -106,11 +119,11 @@ function lockCardData(card_id) {
         }
     });
 
-    localStorage.setItem("data", JSON.stringify(data));
+    setLocalStorage(JSON.stringify(data));
 }
 
 function unlockCardData(card_id) {
-    let data = JSON.parse(localStorage.getItem("data")) || [];
+    let data = JSON.parse(getLocalStorage()) || [];
 
     data.forEach(card => {
         if (card.id == card_id) {
@@ -118,11 +131,11 @@ function unlockCardData(card_id) {
         }
     });
 
-    localStorage.setItem("data", JSON.stringify(data));
+    setLocalStorage(JSON.stringify(data));
 }
 
 function putCardInColumn(card_id, column) {
-    let data = JSON.parse(localStorage.getItem("data")) || [];
+    let data = JSON.parse(getLocalStorage()) || [];
     let temp = null;
 
     data.forEach(card => {
@@ -135,7 +148,7 @@ function putCardInColumn(card_id, column) {
     data = data.filter(card => card.id != card_id);
     data.unshift(temp);
 
-    localStorage.setItem("data", JSON.stringify(data));
+    setLocalStorage(JSON.stringify(data));
 }
 
 function generateID(length) {

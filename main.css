@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Pacifico');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700');
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap');
 
@@ -8,9 +9,6 @@
     100% {
         height: 50vh;
     }
-}
-
-@keyframes height-decrease {
 }
 
 :root {
@@ -36,6 +34,7 @@
 
     --font-family-sans-serif: 'Open Sans', sans-serif;
     --font-family-monospace: 'JetBrains Mono', monospace;
+    --font-family-cursive: 'Pacifico', cursive;
 
     --color-1: #dc3545;
     --color-2: #ffc107;
@@ -68,6 +67,7 @@
 
     --font-family-sans-serif: 'Open Sans', sans-serif;
     --font-family-monospace: 'JetBrains Mono', monospace;
+    --font-family-cursive: 'Pacifico', cursive;
 
     --color-1: #dc3545;
     --color-2: #ffc107;
@@ -100,6 +100,7 @@
 
     --font-family-sans-serif: 'Open Sans', sans-serif;
     --font-family-monospace: 'JetBrains Mono', monospace;
+    --font-family-cursive: 'Pacifico', cursive;
 
     --color-1: #dc3545;
     --color-2: #ffc107;
@@ -193,8 +194,8 @@ body {
 }
 
 .loader-title {
-    font-size: 2rem;
-    font-family: var(--font-family-monospace);
+    font-size: 4rem;
+    font-family: var(--font-family-cursive);
     color: var(--light-color);
     user-select: none;
     pointer-events: none;
@@ -625,7 +626,6 @@ body:not(:has(.card)) .cards-container:not(:has(.card)) > * {
     display: flex;
     flex-wrap: wrap;
     transition: all 0.3s ease-in-out;
-    animation: height-decrease 0.3s ease-in-out;
     justify-content: center;
     align-items: flex-start;
     align-content: flex-start;
