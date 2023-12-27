@@ -1,0 +1,782 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap');
+
+@keyframes height-increase {
+    0% {
+        height: 0;
+    }
+    100% {
+        height: 50vh;
+    }
+}
+
+@keyframes height-decrease {
+}
+
+:root {
+    --primary-color: #343a40;
+    --secondary-color: #6c757d;
+    
+    --success-color: #28a745;
+    --info-color: #17a2b8;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    
+    --light-color: #f8f9fa;
+    --light-gray-color: #e9ecef;
+    --mid-gray-color: #dee2e6;
+    --gray-color: #6c757d;
+    --dark-color: #1d2124;
+
+    --hover-color: #ffffff66;
+    --modal-background-color: #00000066;
+
+    --border-radius: 0.5rem;
+    --border-thickness: 0.2rem;
+
+    --font-family-sans-serif: 'Open Sans', sans-serif;
+    --font-family-monospace: 'JetBrains Mono', monospace;
+
+    --color-1: #dc3545;
+    --color-2: #ffc107;
+    --color-3: #17a2b8;
+    --color-4: #28a745;
+
+    --transition: none;
+}
+
+:root.theme-light {
+    --primary-color: #343a40;
+    --secondary-color: #6c757d;
+    
+    --success-color: #28a745;
+    --info-color: #17a2b8;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    
+    --light-color: #f8f9fa;
+    --light-gray-color: #e9ecef;
+    --mid-gray-color: #dee2e6;
+    --gray-color: #6c757d;
+    --dark-color: #1d2124;
+
+    --hover-color: #ffffff66;
+    --modal-background-color: #00000066;
+
+    --border-radius: 0.5rem;
+    --border-thickness: 0.2rem;
+
+    --font-family-sans-serif: 'Open Sans', sans-serif;
+    --font-family-monospace: 'JetBrains Mono', monospace;
+
+    --color-1: #dc3545;
+    --color-2: #ffc107;
+    --color-3: #17a2b8;
+    --color-4: #28a745;
+
+    --transition: all 0.3s ease-in-out;
+}
+
+:root.theme-dark {
+    --primary-color: #6c757d;
+    --secondary-color: #f8f9fa;
+    
+    --success-color: #28a745;
+    --info-color: #17a2b8;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    
+    --light-color: #1d2124;
+    --light-gray-color: #343a40;
+    --mid-gray-color: #898989;
+    --gray-color: #6c757d;
+    --dark-color: #f8f9fa;
+
+    --hover-color: #00000022;
+    --modal-background-color: #ffffff66;
+
+    --border-radius: 0.5rem;
+    --border-thickness: 0.2rem;
+
+    --font-family-sans-serif: 'Open Sans', sans-serif;
+    --font-family-monospace: 'JetBrains Mono', monospace;
+
+    --color-1: #dc3545;
+    --color-2: #ffc107;
+    --color-3: #17a2b8;
+    --color-4: #28a745;
+
+    --transition: all 0.3s ease-in-out;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-family-sans-serif);
+    transition: var(--transition);
+}
+
+* > .tooltip {
+    display: none;
+    cursor: default;
+    z-index: 10000;
+}
+
+*:has(.tooltip) {
+    position: relative;
+}
+
+*:focus-within > .tooltip {
+    display: none !important;
+}
+
+*:hover > .tooltip {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.5rem;
+    position: fixed;
+    width: max-content;
+    top: inherit;
+    left: inherit;
+    background-color: var(--dark-color);
+    color: var(--light-color);
+    padding: 0.5rem;
+    border-radius: var(--border-radius);
+    z-index: 10000;
+    transform: translateY(2.5rem);
+}
+
+body {
+    background-color: var(--light-color);
+    color: var(--dark-color);
+}
+
+.preload * {
+    transition: none !important;
+}
+
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: var(--primary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+    z-index: 10000;
+}
+
+.loader.off {
+    display: none;
+}
+
+.loader-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.loader-icon {
+    font-size: 5rem;
+    color: var(--light-color);
+    user-select: none;
+    pointer-events: none;
+}
+
+.loader-title {
+    font-size: 2rem;
+    font-family: var(--font-family-monospace);
+    color: var(--light-color);
+    user-select: none;
+    pointer-events: none;
+    margin: 0 0.5rem;
+    font-weight: 600;
+}
+
+.loader-subtitle {
+    font-size: 1rem;
+    font-family: var(--font-family-monospace);
+    color: var(--light-color);
+    user-select: none;
+    pointer-events: none;
+    margin: 0 0.5rem;
+    font-weight: 600;
+}
+
+.bg-color-1 {
+    background-color: var(--color-1) !important;
+    color: var(--light-color) !important;
+}
+
+.bg-color-2 {
+    background-color: var(--color-2) !important;
+    color: var(--light-color) !important;
+}
+
+.bg-color-3 {
+    background-color: var(--color-3) !important;
+    color: var(--light-color) !important;
+}
+
+.bg-color-4 {
+    background-color: var(--color-4) !important;
+    color: var(--light-color) !important;
+}
+
+.navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 8vh;
+    width: 100%;
+    background-color: var(--primary-color);
+    position: sticky;
+    top: 0;
+    color: var(--light-color);
+    padding: 0.5rem;
+    z-index: 10000;
+}
+
+.toolbox {
+    display: flex;
+    justify-content: flex-start;
+    background-color: transparent;
+    color: var(--light-color);
+    height: 100%;
+    padding: 0.25rem;
+    gap: 2rem;
+}
+
+.toolbox-panel {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: var(--secondary-color);
+    color: var(--light-color);
+    padding: 0.5rem;
+    gap: 0.5rem;
+    border-radius: var(--border-radius);
+}
+
+.toolbox-panel-title {
+    font-size: 1rem;
+    font-family: var(--font-family-monospace);
+    color: var(--light-color);
+    user-select: none;
+    pointer-events: none;
+    margin: 0 0.5rem;
+    font-weight: 600;
+}
+
+.toolbox-panel-color-buttons {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.75rem;
+    height: 100%;
+}
+
+.toolbox-color-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--secondary-color);
+    color: var(--light-color);
+    padding: 0.5rem;
+    border: var(--border-thickness) solid var(--light-color);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    height: 100%;
+    aspect-ratio: 5/3;
+}
+
+.toolbox-color-button:hover {
+    filter: brightness(0.8);
+}
+
+.toolbox-action-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff00;
+    color: var(--light-color);
+    padding: 0.5rem;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    height: 100%;
+    aspect-ratio: 1/1;
+    font-size: 1rem;
+}
+
+.toolbox-action-button:hover {
+    background-color: var(--hover-color);
+}
+
+.toolbox-action-button-icon {
+    cursor: pointer;
+}
+
+.toolbox .dropdown-content {
+    display: none;
+    cursor: default;
+}
+
+.toolbox .dropdown {
+    position: relative;
+}
+
+.toolbox .dropdown:focus-within .dropdown-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 0.5rem;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--dark-color);
+    color: var(--light-color);
+    padding: 0.5rem;
+    border-radius: var(--border-radius);
+    z-index: 10000;
+    border: var(--border-thickness) solid var(--light-color);
+}
+
+.modal {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--modal-background-color);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: 10000;
+}
+
+.modal[open] {
+    display: flex;
+}
+
+.modal-all {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    color: var(--primary-color);
+    padding: 0;
+    border-radius: var(--border-radius);
+    gap: 0;
+}
+
+.modal-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--light-color);
+    color: var(--primary-color);
+    padding: 0;
+    border-radius: var(--border-radius);
+    gap: 0;
+    height: 50vh;
+    width: 50vw;
+    overflow: hidden;
+}
+
+.modal-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--light-color);
+    color: var(--primary-color);
+    padding: 0;
+    border-radius: 0;
+    gap: 1rem;
+    height: 100%;
+    width: 100%;
+}
+
+.modal-input > textarea {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--light-color);
+    color: var(--dark-color);
+    padding: 0.5rem 1rem;
+    padding-right: 0;
+    border-radius: var(--border-radius);
+    gap: 1rem;
+    height: 100%;
+    width: 100%;
+    resize: none;
+    border: none;
+    outline: none;
+    font-size: 2rem;
+    font-family: var(--font-family-monospace);
+}
+
+.modal-color-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    padding: 1rem;
+    border-radius: 0;
+    gap: 1rem;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.modal-color-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--secondary-color);
+    color: var(--light-color);
+    padding: 0.5rem;
+    border: var(--border-thickness) solid var(--light-color);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    width: 5rem;
+    aspect-ratio: 2/1;
+}
+
+.modal-color-button:hover {
+    filter: brightness(0.8);
+}
+
+.modal-help {
+    padding: 0.5rem;
+    font-size: 1rem;
+    font-family: var(--font-family-monospace);
+    color: var(--light-color);
+    user-select: none;
+    pointer-events: none;
+    font-weight: 600;
+}
+
+.container {
+    padding: 2rem 4rem;
+}
+
+.cards-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 1rem;
+}
+
+body:has(.card) .cards-container::before, body:has(.card) .cards-container::after {
+    display: none;
+}
+
+body:not(:has(.card)) .cards-container:not(:has(.card)) {
+    gap: 0;
+    flex-direction: row;
+}
+
+body:not(:has(.card)) .cards-container:not(:has(.card)) > * {
+    display: none;
+}
+
+.cards-container:not(:has(.card))::before {
+    content: "\e5a1";
+    font-size: 1.5rem;
+    font-family: "Font Awesome 5 Free";
+    color: var(--dark-color);
+    user-select: none;
+    pointer-events: none;
+    font-weight: 600;
+    opacity: 0.5;
+    margin-right: 0.75rem;
+}
+
+.cards-container:not(:has(.card))::after {
+    content: "No cards to show";
+    font-size: 1.5rem;
+    font-family: var(--font-family-monospace);
+    color: var(--dark-color);
+    user-select: none;
+    pointer-events: none;
+    font-weight: 600;
+    opacity: 0.5;
+}
+
+.card {
+    background-color: var(--light-gray-color);
+    color: var(--dark-color);
+    border-radius: var(--border-radius);
+    width: 100%;
+    max-width: 18%;
+    aspect-ratio: 3/2;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 0;
+    margin: 0 1rem 2rem 1rem;
+}
+
+.card.dragging {
+    pointer-events: none;
+    opacity: 0.5;
+    transform: scale(0.7);
+    margin: 0;
+    display: block !important;
+    z-index: 10000;
+}
+
+.card-header {
+    padding: 0.5rem;
+    user-select: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: grab;
+}
+
+.card-header:active {
+    cursor: grabbing;
+}
+
+.card-header:has(.fa-lock) {
+    cursor: not-allowed;
+}
+
+.card-header:has(.fa-lock):active {
+    cursor: not-allowed;
+}
+
+.card-id {
+    font-size: 1rem;
+    font-family: var(--font-family-monospace);
+    color: var(--light-color);
+    user-select: none;
+    pointer-events: none;
+    margin: 0 0.5rem;
+    font-weight: 600;
+}
+
+.card-buttons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.card-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff00;
+    color: var(--light-color);
+    border: none;
+    border-radius: 100%;
+    cursor: pointer;
+    height: 1.5rem;
+    aspect-ratio: 1/1;
+    font-size: 0.75rem;
+}
+
+.card-button:hover {
+    background-color: var(--hover-color);
+}
+
+.card-content {
+    padding: 1rem;
+    font-size: 1.5rem;
+    font-family: var(--font-family-monospace);
+    height: 100%;
+    overflow-y: auto;
+}
+
+.card-columns {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    gap: 1rem;
+}
+
+.card-column {
+    gap: 1rem;
+    width: 25%;
+    background-color: var(--mid-gray-color);
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    transition: all 0.3s ease-in-out;
+    animation: height-decrease 0.3s ease-in-out;
+    justify-content: center;
+    align-items: flex-start;
+    align-content: flex-start;
+}
+
+.card-column:not(:has(.card)) {
+    gap: 0;
+}
+
+.card-column:not(:has(.card))::after {
+    content: "No cards to show";
+    font-size: 1.5rem;
+    font-family: var(--font-family-monospace);
+    color: var(--dark-color);
+    user-select: none;
+    pointer-events: none;
+    font-weight: 600;
+    opacity: 0.5;
+}
+
+.card-column:not(:has(.card))::before {
+    content: "\e5a1";
+    font-size: 1.5rem;
+    font-family: "Font Awesome 5 Free";
+    color: var(--dark-color);
+    user-select: none;
+    pointer-events: none;
+    font-weight: 600;
+    opacity: 0.5;
+    margin-right: 0.75rem;
+}
+
+.card-column .card {
+    max-width: 100%;
+    margin: 0;
+}
+
+
+.cards {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.cards:not(:has(.card))::after {
+    content: "No cards to show";
+    font-size: 1.5rem;
+    font-family: var(--font-family-monospace);
+    color: var(--dark-color);
+    user-select: none;
+    pointer-events: none;
+    font-weight: 600;
+    opacity: 0.5;
+}
+
+.cards:not(:has(.card))::before {
+    content: "\e5a1";
+    font-size: 1.5rem;
+    font-family: "Font Awesome 5 Free";
+    color: var(--dark-color);
+    user-select: none;
+    pointer-events: none;
+    font-weight: 600;
+    opacity: 0.5;
+    margin-right: 0.75rem;
+}
+
+body:has(.card.dragging) .card-column {
+    height: 50vh;
+    cursor: grabbing;
+    animation: height-increase 0.3s ease-in-out;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+}
+
+body:has(.card.dragging) .card-column > * {
+    display: none;
+}
+
+body:has(.card.dragging) .card-column::before {
+    content: "\e494";
+    font-size: 1.5rem;
+    font-family: "Font Awesome 5 Free";
+    color: var(--dark-color);
+    user-select: none;
+    pointer-events: none;
+    font-weight: 600;
+    opacity: 0.5;
+    margin-right: 0.75rem;
+}
+
+body:has(.card.dragging) .card-column::after {
+    content: "Drop here";
+    font-size: 1.5rem;
+    font-family: var(--font-family-monospace);
+    color: var(--dark-color);
+    user-select: none;
+    pointer-events: none;
+    font-weight: 600;
+    opacity: 0.5;
+}
+
+body:has(.card.dragging) .card-column:hover {
+    transform: scale(1.05);
+}
+
+body:has(.card.dragging) .cards {
+    gap: 0;
+    width: 100%;
+    background-color: var(--mid-gray-color);
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease-in-out;
+    cursor: grabbing;
+    height: 20vh;
+}
+
+body:has(.card.dragging) .cards > * {
+    display: none;
+}
+
+body:has(.card.dragging) .cards::before {
+    content: "\e494";
+    font-size: 1.5rem;
+    font-family: "Font Awesome 5 Free";
+    color: var(--dark-color);
+    user-select: none;
+    pointer-events: none;
+    font-weight: 600;
+    opacity: 0.5;
+    margin-right: 0.75rem;
+}
+
+body:has(.card.dragging) .cards::after {
+    content: "Drop here";
+    font-size: 1.5rem;
+    font-family: var(--font-family-monospace);
+    color: var(--dark-color);
+    user-select: none;
+    pointer-events: none;
+    font-weight: 600;
+    opacity: 0.5;
+}
+
+body:has(.card.dragging) .cards:hover {
+    transform: scale(1.05);
+}
+

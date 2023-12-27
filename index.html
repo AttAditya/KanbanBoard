@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanban Board</title>
+
+    <link rel="stylesheet" href="main.css">
+
+    <script defer src="main.js"></script>
+
+    <link rel="stylesheet" href="fontawesome/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="toolbox">
+            <div class="toolbox-panel">
+                <div class="toolbox-panel-title">
+                    Actions
+                </div>
+                
+                <button class="toolbox-action-button" id="add-card-button" onclick="openModal();">
+                    <i class="fa-solid fa-plus toolbox-action-button-icon"></i>
+
+                    <span class="tooltip">
+                        Add a card
+                    </span>
+                </button>
+
+                <button class="toolbox-action-button" onclick="reloadPage();">
+                    <i class="fa-solid fa-rotate toolbox-action-button-icon"></i>
+
+                    <span class="tooltip">
+                        Reload page
+                    </span>
+                </button>
+
+                <button class="toolbox-action-button dropdown" onclick="toggleFilters();">
+                    <i class="fa-solid fa-filter toolbox-action-button-icon"></i>
+
+                    <div class="dropdown-content" id="filters">
+                        <div class="toolbox-panel-title">
+                            Filters
+                        </div>
+                        
+                        <div class="toolbox-panel-color-buttons">
+                            <div class="toolbox-color-button bg-color-1"></div>
+                            <div class="toolbox-color-button bg-color-2"></div>
+                            <div class="toolbox-color-button bg-color-3"></div>
+                            <div class="toolbox-color-button bg-color-4"></div>
+                            <div class="toolbox-action-button">
+                                <i class="fa-solid fa-times toolbox-action-button-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <span class="tooltip">
+                        Filters
+                    </span>
+                </button>
+
+                <button class="toolbox-action-button" onclick="lockAllCards();">
+                    <i class="fa-solid fa-lock toolbox-action-button-icon"></i>
+
+                    <span class="tooltip">
+                        Lock all cards
+                    </span>
+                </button>
+
+                <button class="toolbox-action-button" onclick="unlockAllCards();">
+                    <i class="fa-solid fa-unlock toolbox-action-button-icon"></i>
+
+                    <span class="tooltip">
+                        Unlock all cards
+                    </span>
+                </button>
+
+                <button class="toolbox-action-button" onclick="deleteAllCards();">
+                    <i class="fa-solid fa-trash toolbox-action-button-icon"></i>
+
+                    <span class="tooltip">
+                        Delete all unlocked cards
+                    </span>
+                </button>
+
+                <button class="toolbox-action-button" onclick="toggleTheme();">
+                    <i class="fa-solid fa-moon toolbox-action-button-icon theme-icon"></i>
+
+                    <span class="tooltip">
+                        Toggle theme
+                    </span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="cards-container">
+            <div class="card-columns">
+                <div class="card-column card-column-1" id="card-column-1"></div>
+                <div class="card-column card-column-2" id="card-column-2"></div>
+                <div class="card-column card-column-3" id="card-column-3"></div>
+                <div class="card-column card-column-4" id="card-column-4"></div>
+            </div>
+            
+            <div class="cards" id="cards"></div>
+        </div>
+    </div>
+    
+    <dialog class="modal" id="modal">
+        <div class="modal-all">
+            <div class="modal-container">
+                <div class="modal-input">
+                    <textarea id="task-input" class="task-input-textarea" placeholder="Add a task..."></textarea>
+                </div>
+                <div class="modal-color-buttons">
+                    <button class="modal-color-button bg-color-1"></button>
+                    <button class="modal-color-button bg-color-2"></button>
+                    <button class="modal-color-button bg-color-3"></button>
+                    <button class="modal-color-button bg-color-4"></button>
+                </div>
+            </div>
+            <div class="modal-help">
+                Click outside to cancel
+            </div>
+        </div>
+    </dialog>
+
+    <div class="loader" id="loader">
+        <div class="loader-container">
+            <div class="loader-icon">
+                <i class="fa-solid fa-fan fa-spin"></i>
+            </div>
+            <div class="loader-title">
+                Kanban Board
+            </div>
+            <div class="loader-subtitle">
+                Loading...
+            </div>
+        </div>
+    </div>
+</body>
+</html>
