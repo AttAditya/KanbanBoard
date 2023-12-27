@@ -156,6 +156,7 @@
     pointer-events: none;
     margin: 0 0.5rem;
     font-weight: 600;
+    text-align: centers;
 }
 
 .compatibility-error-subtitle {
